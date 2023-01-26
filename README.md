@@ -2,4 +2,4 @@
 
 Contains my homework submissions for https://github.com/DataTalksClub/data-engineering-zoomcamp/blob/main/cohorts/2023
 
-Answers present under cohorts/2023 folder
+Answers present under cohorts/2023 folder along with the artifacts under week1 folder
