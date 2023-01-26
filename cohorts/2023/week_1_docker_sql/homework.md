@@ -50,7 +50,8 @@ Package    Version
 ---------- -------
 pip        22.0.4
 setuptools 58.1.0
-wheel      0.38.4```
+wheel      0.38.4
+```
 
 # Prepare Postgres
 
@@ -80,9 +81,11 @@ Remember that `lpep_pickup_datetime` and `lpep_dropoff_datetime` columns are in 
 - 21090
 
 Query
-```select count(1) from public.green_trip_data where 
+```
+select count(1) from public.green_trip_data where 
 to_char(lpep_pickup_datetime, 'yyyy-MM-dd') = '2019-01-15'
-and to_char(lpep_dropoff_datetime, 'yyyy-MM-dd') = '2019-01-15';```
+and to_char(lpep_dropoff_datetime, 'yyyy-MM-dd') = '2019-01-15';
+```
 
 ## Question 4. Largest trip for each day
 
@@ -95,8 +98,10 @@ Use the pick up time for your calculations.
 - 2019-01-10
 
 Query
-```select trip_distance, to_char(lpep_pickup_datetime, 'yyyy-MM-dd') lpep_pickup_datetime  
-from public.green_trip_data order by trip_distance desc limit 1; ```
+```
+select trip_distance, to_char(lpep_pickup_datetime, 'yyyy-MM-dd') lpep_pickup_datetime  
+from public.green_trip_data order by trip_distance desc limit 1; 
+```
 
 ## Question 5. The number of passengers
 
@@ -111,7 +116,8 @@ Query
 ```select *  from (select passenger_count, count(1) from public.green_trip_data where 
 to_char(lpep_pickup_datetime, 'yyyy-MM-dd') = '2019-01-01'
 or to_char(lpep_dropoff_datetime, 'yyyy-MM-dd') = '2019-01-01'
-group by passenger_count) pc where passenger_count in (2,3) ;```
+group by passenger_count) pc where passenger_count in (2,3) ;
+```
 
 
 ## Question 6. Largest tip
@@ -134,7 +140,8 @@ zones doz
 where td."PULocationID" = puz."LocationID"
 and td."DOLocationID" = doz."LocationID"
 and puz."Zone" = 'Astoria'
-order by tip_amount desc limit 1;```
+order by tip_amount desc limit 1;
+```
 
 
 ## Submitting the solutions
