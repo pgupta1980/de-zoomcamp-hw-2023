@@ -31,7 +31,7 @@ How many python packages/modules are installed?
 - 3 - packages installed
 - 7
 
-(base) pgupta@de-zoomcamp:~/de-zoomcamp-hw-2023$ docker run -it --entrypoint=bash python:3.9
+```(base) pgupta@de-zoomcamp:~/de-zoomcamp-hw-2023$ docker run -it --entrypoint=bash python:3.9
 Unable to find image 'python:3.9' locally
 3.9: Pulling from library/python
 bbeef03cda1f: Pull complete 
@@ -53,7 +53,7 @@ setuptools 58.1.0
 wheel      0.38.4
 WARNING: You are using pip version 22.0.4; however, version 22.3.1 is available.
 You should consider upgrading via the '/usr/local/bin/python -m pip install --upgrade pip' command.
-root@249bbb001953:/# 
+root@249bbb001953:/# ```
 
 # Prepare Postgres
 
@@ -82,9 +82,10 @@ Remember that `lpep_pickup_datetime` and `lpep_dropoff_datetime` columns are in 
 - 17630
 - 21090
 
-select count(1) from public.green_trip_data where 
+Query
+```select count(1) from public.green_trip_data where 
 to_char(lpep_pickup_datetime, 'yyyy-MM-dd') = '2019-01-15'
-and to_char(lpep_dropoff_datetime, 'yyyy-MM-dd') = '2019-01-15';
+and to_char(lpep_dropoff_datetime, 'yyyy-MM-dd') = '2019-01-15';```
 
 ## Question 4. Largest trip for each day
 
@@ -96,8 +97,9 @@ Use the pick up time for your calculations.
 - 2019-01-15 - Ans
 - 2019-01-10
 
-select trip_distance, to_char(lpep_pickup_datetime, 'yyyy-MM-dd') lpep_pickup_datetime  
-from public.green_trip_data order by trip_distance desc limit 1; 
+Query
+```select trip_distance, to_char(lpep_pickup_datetime, 'yyyy-MM-dd') lpep_pickup_datetime  
+from public.green_trip_data order by trip_distance desc limit 1; ```
 
 ## Question 5. The number of passengers
 
@@ -108,10 +110,11 @@ In 2019-01-01 how many trips had 2 and 3 passengers?
 - 2: 1282 ; 3: 254 - Ans
 - 2: 1282 ; 3: 274
 
-select *  from (select passenger_count, count(1) from public.green_trip_data where 
+Query
+```select *  from (select passenger_count, count(1) from public.green_trip_data where 
 to_char(lpep_pickup_datetime, 'yyyy-MM-dd') = '2019-01-01'
 or to_char(lpep_dropoff_datetime, 'yyyy-MM-dd') = '2019-01-01'
-group by passenger_count) pc where passenger_count in (2,3) ;
+group by passenger_count) pc where passenger_count in (2,3) ;```
 
 
 ## Question 6. Largest tip
@@ -126,14 +129,15 @@ Note: it's not a typo, it's `tip` , not `trip`
 - South Ozone Park
 - Long Island City/Queens Plaza - Ans
 
-select doz."Zone"  from 
+Query
+```select doz."Zone"  from 
 green_trip_data td,
 zones puz,
 zones doz
 where td."PULocationID" = puz."LocationID"
 and td."DOLocationID" = doz."LocationID"
 and puz."Zone" = 'Astoria'
-order by tip_amount desc limit 1;
+order by tip_amount desc limit 1;```
 
 
 ## Submitting the solutions
