@@ -53,7 +53,7 @@ setuptools 58.1.0
 wheel      0.38.4
 WARNING: You are using pip version 22.0.4; however, version 22.3.1 is available.
 You should consider upgrading via the '/usr/local/bin/python -m pip install --upgrade pip' command.
-root@249bbb001953:/# ```
+root@249bbb001953:/```
 
 # Prepare Postgres
 
