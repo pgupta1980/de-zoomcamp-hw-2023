@@ -55,7 +55,10 @@ Using the flow in `etl_web_to_gcs.py`, create a deployment to run on the first o
 
 <b>Ans:-</b>
 - `0 5 1 * *`
-![Alt text](images/ans2.png?raw=true "ans2.png")
+
+<b>Screenshot : </b> 
+
+![ans2](https://user-images.githubusercontent.com/6199261/216910409-008c58bd-7e94-4fc6-9fa9-1bcbf486eaf9.png)
 
 
 <b>Complete Log : </b>
