@@ -14,6 +14,33 @@ How many rows does that dataset have?
 * 299,234
 * 822,132
 
+<b>Ans:-</b>
+
+The file ans1.py contains the code for this solution, result - 447770
+
+<b>Log File Statement : </b> 06:55:05.166 | INFO    | Task run 'clean-b9fd7e03-0' - rows: 447770
+
+<b>Complete Log : </b>
+```
+python cohorts/2023/week_2/ans1.py 
+06:55:02.309 | INFO    | prefect.engine - Created flow run 'practical-seal' for flow 'etl-web-to-gcs'
+06:55:02.485 | INFO    | Flow run 'practical-seal' - Created task run 'fetch-b4598a4a-0' for task 'fetch'
+06:55:02.487 | INFO    | Flow run 'practical-seal' - Executing 'fetch-b4598a4a-0' immediately...
+06:55:04.868 | INFO    | Task run 'fetch-b4598a4a-0' - Finished in state Completed()
+06:55:04.905 | INFO    | Flow run 'practical-seal' - Created task run 'clean-b9fd7e03-0' for task 'clean'
+06:55:04.906 | INFO    | Flow run 'practical-seal' - Executing 'clean-b9fd7e03-0' immediately...
+06:55:05.166 | INFO    | Task run 'clean-b9fd7e03-0' - rows: 447770
+06:55:05.203 | INFO    | Task run 'clean-b9fd7e03-0' - Finished in state Completed()
+06:55:05.244 | INFO    | Flow run 'practical-seal' - Created task run 'write_local-f322d1be-0' for task 'write_local'
+06:55:05.246 | INFO    | Flow run 'practical-seal' - Executing 'write_local-f322d1be-0' immediately...
+06:55:06.738 | INFO    | Task run 'write_local-f322d1be-0' - Finished in state Completed()
+06:55:06.773 | INFO    | Flow run 'practical-seal' - Created task run 'write_gcs-1145c921-0' for task 'write_gcs'
+06:55:06.775 | INFO    | Flow run 'practical-seal' - Executing 'write_gcs-1145c921-0' immediately...
+06:55:06.915 | INFO    | Task run 'write_gcs-1145c921-0' - Getting bucket 'prefect-de-zoomcamp-bucket-2299'.
+06:55:07.380 | INFO    | Task run 'write_gcs-1145c921-0' - Uploading from PosixPath('../data/green/green_tripdata_2020-01.parquet') to the bucket 'prefect-de-zoomcamp-bucket-2299' path '../data/green/green_tripdata_2020-01.parquet'.
+06:55:11.125 | INFO    | Task run 'write_gcs-1145c921-0' - Finished in state Completed()
+06:55:11.162 | INFO    | Flow run 'practical-seal' - Finished in state Completed('All states completed.')
+```
 
 ## Question 2. Scheduling with Cron
 
@@ -26,6 +53,26 @@ Using the flow in `etl_web_to_gcs.py`, create a deployment to run on the first o
 - `5 * 1 0 *`
 - `* * 5 1 0`
 
+<b>Ans:-</b>
+- `0 5 1 * *`
+![Alt text](../images/ans2.png?raw=true "ans2.png")
+
+
+<b>Complete Log : </b>
+```
+(zoomcamp) pgupta@de-zoomcamp:~/de-zoomcamp-hw-2023/cohorts/2023/week_2$ prefect deployment build ./ans2.py:etl_web_to_gcs -n ans2_cron --cron "0 5 1 * *"
+Found flow 'etl-web-to-gcs'
+Deployment YAML created at '/home/pgupta/de-zoomcamp-hw-2023/cohorts/2023/week_2/etl_web_to_gcs-deployment.yaml'.
+Deployment storage None does not have upload capabilities; no files uploaded.  Pass --skip-upload to suppress this warning.
+(zoomcamp) pgupta@de-zoomcamp:~/de-zoomcamp-hw-2023/cohorts/2023/week_2$ prefect deployment apply ./etl_web_to_gcs-deployment.yaml 
+Successfully loaded 'ans2_cron'
+Deployment 'etl-web-to-gcs/ans2_cron' successfully created with id '9ccb508d-45e5-49a2-a574-a31365d4a6cb'.
+View Deployment in UI: http://127.0.0.1:4200/deployments/deployment/9ccb508d-45e5-49a2-a574-a31365d4a6cb
+
+To execute flow runs from this deployment, start an agent that pulls work from the 'default' work queue:
+$ prefect agent start -q 'default'
+(zoomcamp) pgupta@de-zoomcamp:~/de-zoomcamp-hw-2023/cohorts/2023/week_2$ 
+```
 
 ## Question 3. Loading data to BigQuery 
 
