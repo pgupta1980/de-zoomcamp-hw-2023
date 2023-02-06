@@ -7,14 +7,9 @@
 * Leaderboard
 * [Course Playlist: Only 2023 Live videos & homeworks](https://www.youtube.com/playlist?list=PL3MmuxUbc_hJjEePXIdE-LVUx_1ZZjYGW)
 
-[**Week 1: Introduction & Prerequisites**](week_1_docker_sql/)
+[**Week 1: Introduction & Prerequisites**](week_1_docker_sql/homework.md)
 
-* [Homework](week_1_docker_sql/homework.md)
-
-
-
-Week 2: Workflow Orchestration
-
+[**Week 2: Workflow Orchestration**](week_2/homework.md)
 
 Week 3: Data Warehouse
 
