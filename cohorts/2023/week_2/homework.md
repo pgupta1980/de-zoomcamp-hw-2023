@@ -97,6 +97,8 @@ Make sure you have the parquet data files for Yellow taxi data for Feb. 2019 and
 - 11,338,483
 
 <b>Ans:-</b>
+14,851,920
+
 Code for printing total count in ans3.py
 
 ```
