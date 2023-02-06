@@ -14,7 +14,7 @@ How many rows does that dataset have?
 * 299,234
 * 822,132
 
-<b>Ans:-</b>
+<b>Ans:-</b> 447,770
 
 The file ans1.py contains the code for this solution, result - 447770
 
@@ -53,8 +53,7 @@ Using the flow in `etl_web_to_gcs.py`, create a deployment to run on the first o
 - `5 * 1 0 *`
 - `* * 5 1 0`
 
-<b>Ans:-</b>
-- `0 5 1 * *`
+<b>Ans:-</b> `0 5 1 * *`
 
 <b>Screenshot : </b> 
 
@@ -96,8 +95,7 @@ Make sure you have the parquet data files for Yellow taxi data for Feb. 2019 and
 - 27,235,753
 - 11,338,483
 
-<b>Ans:-</b>
-14,851,920
+<b>Ans:-</b> 14,851,920
 
 Code for printing total count in ans3.py
 
@@ -163,7 +161,8 @@ How many rows were processed by the script?
 - 88,605
 - 190,225
 
-<b>Ans:-</b>
+<b>Ans:-</b> 88,605
+
 
 <b>Github Storage Block - make_github_block.py</b>
 
@@ -249,8 +248,7 @@ How many rows were processed by the script?
 - `728,390`
 - `514,392`
 
-<b>Ans :- </b>
-514,392 is the answer
+<b>Ans :- </b> 514,392
 
 ```
 08:14:01.183 | INFO    | Flow run 'attentive-wren' - dataframe count for green, 2019, 4: 514392
@@ -278,8 +276,7 @@ Prefect Secret blocks provide secure, encrypted storage in the database and obfu
 - 8
 - 10
 
-<b>Ans:- </b>
-8
+<b>Ans:- </b> 8
 
 <b>Secret Configuration Screenshots :- </b>
 ![image](https://user-images.githubusercontent.com/6199261/216919802-76a72d28-fe42-4717-9ae5-7e30d2394e9f.png)
