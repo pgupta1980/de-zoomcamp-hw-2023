@@ -96,6 +96,54 @@ Make sure you have the parquet data files for Yellow taxi data for Feb. 2019 and
 - 27,235,753
 - 11,338,483
 
+<b>Ans:-</b>
+Code for printing total count in ans3.py
+
+```
+
+@flow(log_prints=True)
+def ans3_flow(
+    months: list[int] = [2, 3], year: int = 2019, color: str = "yellow"
+):
+    total_count = 0
+    for month in months:
+        row_count = etl_web_to_gcs_to_bq(year, month, color)
+        print(f"""dataframe count for {color}, {year}, {month}: {row_count}""")
+        total_count = total_count + row_count
+
+    print(f"""Total row count: {total_count}""")
+
+```
+
+<b>Command Line :</b>
+
+```
+
+[(zoomcamp) pgupta@de-zoomcamp:~/de-zoomcamp-hw-2023/cohorts/2023/week_2$ prefect deployment build ./ans3.py:ans3_flow -n "ans3"
+Found flow 'ans3-flow'
+Deployment YAML created at '/home/pgupta/de-zoomcamp-hw-2023/cohorts/2023/week_2/ans3_flow-deployment.yaml'.
+Deployment storage None does not have upload capabilities; no files uploaded.  Pass --skip-upload to suppress this warning.
+(zoomcamp) pgupta@de-zoomcamp:~/de-zoomcamp-hw-2023/cohorts/2023/week_2$ prefect deployment apply ./ans3_flow-deployment.yaml 
+Successfully loaded 'ans3'
+Deployment 'ans3-flow/ans3' successfully created with id '1ba02425-f62a-4b1a-bc07-ba5047a96036'.
+View Deployment in UI: http://127.0.0.1:4200/deployments/deployment/1ba02425-f62a-4b1a-bc07-ba5047a96036
+
+To execute flow runs from this deployment, start an agent that pulls work from the 'default' work queue:
+$ prefect agent start -q 'default'
+(zoomcamp) pgupta@de-zoomcamp:~/de-zoomcamp-hw-2023/cohorts/2023/week_2$ prefect deployment run ans3-flow/ans3 --params '{"months": [2,3], "color": "yellow", "year":2019}'
+Creating flow run for deployment 'ans3-flow/ans3'...
+Created flow run 'tacky-toad'.
+└── UUID: abc39c37-a26f-45da-8423-b362472b3b19
+└── Parameters: {'months': [2, 3], 'color': 'yellow', 'year': 2019}
+└── Scheduled start time: 2023-02-06 05:37:55 UTC (now)
+└── URL: http://127.0.0.1:4200/flow-runs/flow-run/abc39c37-a26f-45da-8423-b362472b3b19
+(zoomcamp) pgupta@de-zoomcamp:~/de-zoomcamp-hw-2023/cohorts/2023/week_2$ ](url)
+
+```
+
+<b>Log : </b>
+
+![image](https://user-images.githubusercontent.com/6199261/216911820-32e4672c-6ca6-415f-805a-6f0f0d10a32d.png)
 
 
 ## Question 4. Github Storage Block
