@@ -141,7 +141,7 @@ Created flow run 'tacky-toad'.
 
 ```
 
-<b>Log : </b>
+<b>Log Screenshot : </b>
 
 ![image](https://user-images.githubusercontent.com/6199261/216911820-32e4672c-6ca6-415f-805a-6f0f0d10a32d.png)
 
@@ -160,6 +160,62 @@ How many rows were processed by the script?
 - 192,297
 - 88,605
 - 190,225
+
+<b>Ans:-</b>
+
+<b>Github Storage Block - make_github_block.py</b>
+
+```
+
+from prefect.filesystems import GitHub
+
+block = GitHub(
+    repository="https://github.com/pgupta1980/de-zoomcamp-hw-2023.git"
+)
+block.save("de-zoomcamp-github", overwrite=True)
+
+```
+
+<b>Git Commit Steps : </b>
+
+```
+
+git add .
+git commit -m "week 2"
+git push
+
+```
+
+<b>Command Line : </b>
+
+```
+
+(zoomcamp) pgupta@de-zoomcamp:~/de-zoomcamp-hw-2023$ prefect deployment build cohorts/2023/week_2/ans4.py:etl_web_to_gcs  -n ans4-github  -sb github/de-zoomcamp-github  --apply
+Found flow 'etl-web-to-gcs'
+Deployment YAML created at '/home/pgupta/de-zoomcamp-hw-2023/etl_web_to_gcs-deployment.yaml'.
+Deployment storage GitHub(repository='https://github.com/pgupta1980/de-zoomcamp-hw-2023.git', reference=None, access_token=None) does not have 
+upload capabilities; no files uploaded.  Pass --skip-upload to suppress this warning.
+Deployment 'etl-web-to-gcs/ans4-github' successfully created with id '9e165fef-800f-4001-9bfc-cbe1be4af8fd'.
+
+To execute flow runs from this deployment, start an agent that pulls work from the 'default' work queue:
+$ prefect agent start -q 'default'
+(zoomcamp) pgupta@de-zoomcamp:~/de-zoomcamp-hw-2023$ prefect deployment run 'etl-web-to-gcs/github-deploy' -p color='green' -p year=2020 -p month=11Creating flow run for deployment 'etl-web-to-gcs/github-deploy'...
+Created flow run 'boisterous-koel'.
+└── UUID: 03e3450f-42e3-44ce-88b8-8ba6197f2885
+└── Parameters: {'color': 'green', 'year': 2020, 'month': 11}
+└── Scheduled start time: 2023-02-06 07:52:32 UTC (now)
+└── URL: http://127.0.0.1:4200/flow-runs/flow-run/03e3450f-42e3-44ce-88b8-8ba6197f2885
+(zoomcamp) pgupta@de-zoomcamp:~/de-zoomcamp-hw-2023$ 
+
+```
+Count of rows processed from log file : 
+
+```
+07:56:55.002 | INFO    | Flow run 'aquamarine-baboon' - dataframe count for green, 2020, 11: 88605
+```
+
+<b>Log Screenshot : </b>
+![image](https://user-images.githubusercontent.com/6199261/216916332-a84b7c31-ef47-4d43-b3d4-bd5b5af7d960.png)
 
 
 
@@ -191,6 +247,25 @@ How many rows were processed by the script?
 - `728,390`
 - `514,392`
 
+<b>Ans :- </b>
+514,392 is the answer
+
+```
+08:14:01.183 | INFO    | Flow run 'attentive-wren' - dataframe count for green, 2019, 4: 514392
+```
+
+<b>Notification Setup </b>
+![image](https://user-images.githubusercontent.com/6199261/216917316-f84ce87d-fd25-4201-b2d7-3b845f310b95.png)
+![image](https://user-images.githubusercontent.com/6199261/216917422-20670747-2ed9-4c74-818d-d9d99ec4f392.png)
+
+<b>Slack App Setup </b>
+![image](https://user-images.githubusercontent.com/6199261/216917679-a20e8aae-df21-484a-96c2-5b16ad35aceb.png)
+
+<b>Notification Received : </b>
+![image](https://user-images.githubusercontent.com/6199261/216918039-a0db27a6-5ef5-4748-973c-3b48e780c596.png)
+
+<b>Log :</b>
+![image](https://user-images.githubusercontent.com/6199261/216919232-0c8677e6-b42c-4c5b-9e46-7a20bffd6331.png)
 
 ## Question 6. Secrets
 
@@ -200,6 +275,13 @@ Prefect Secret blocks provide secure, encrypted storage in the database and obfu
 - 6
 - 8
 - 10
+
+<b>Ans:- </b>
+8
+
+<b>Secret Configuration Screenshots :- </b>
+![image](https://user-images.githubusercontent.com/6199261/216919802-76a72d28-fe42-4717-9ae5-7e30d2394e9f.png)
+![image](https://user-images.githubusercontent.com/6199261/216919972-c840df29-450d-4727-8574-31d4b6e33661.png)
 
 
 ## Submitting the solutions
