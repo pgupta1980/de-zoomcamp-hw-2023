@@ -11,7 +11,7 @@ def fetch(dataset_url: str) -> pd.DataFrame:
     # if randint(0, 1) > 0:
     #     raise Exception
 
-    df = pd.read_csv(dataset_url)
+    df = pd.read_csv(dataset_url, low_memory=False)
     return df
 
 
@@ -22,8 +22,8 @@ def clean(df: pd.DataFrame) -> pd.DataFrame:
     # df["tpep_dropoff_datetime"] = pd.to_datetime(df["tpep_dropoff_datetime"])
     df["lpep_pickup_datetime"] = pd.to_datetime(df["lpep_pickup_datetime"])
     df["lpep_dropoff_datetime"] = pd.to_datetime(df["lpep_dropoff_datetime"])
-    print(df.head(2))
-    print(f"columns: {df.dtypes}")
+    # print(df.head(2))
+    # print(f"columns: {df.dtypes}")
     print(f"rows: {len(df)}")
     return df
 

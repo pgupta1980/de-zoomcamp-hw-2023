@@ -3,7 +3,7 @@
 ###
 name: ans2_cron
 description: The main ETL function
-version: 60c1c5d389510ffa57a055a5ca154338
+version: d21a0d4a124c182549c0f4b892b3207a
 # The work queue that will handle this deployment's runs
 work_queue_name: default
 tags: []
