@@ -10,6 +10,12 @@ tags: []
 parameters: {}
 schedule: null
 infra_overrides: {}
+
+###
+### DO NOT EDIT BELOW THIS LINE
+###
+flow_name: etl-web-to-gcs
+manifest_path: null
 infrastructure:
   type: process
   env: {}
@@ -18,14 +24,11 @@ infrastructure:
   command: null
   stream_output: true
   working_dir: null
+  _block_document_id: 90e7dd1b-509e-4fce-b052-d10d9ccee288
+  _block_document_name: anonymous-35ea70a4-a506-4438-a6c7-5e49c5ff18ef
+  _is_anonymous: true
   block_type_slug: process
   _block_type_slug: process
-
-###
-### DO NOT EDIT BELOW THIS LINE
-###
-flow_name: etl-web-to-gcs
-manifest_path: null
 storage:
   repository: https://github.com/pgupta1980/de-zoomcamp-hw-2023.git
   reference: null

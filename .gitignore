@@ -6,6 +6,16 @@ __pycache__/
 # C extensions
 *.so
 
+# folders
+week1/2_docker_sql/ny_taxi_postgres_data
+week1/2_docker_sql/data_pgadmin
+week1/2_docker_sql/data
+data
+data/yellow/*.*
+data/green/*.*
+data/*.*
+cohorts/data/
+
 # Distribution / packaging
 .Python
 build/
