@@ -9,12 +9,61 @@ Create an external table using the fhv 2019 data. </br>
 Create a table in BQ using the fhv 2019 data (do not partition or cluster this table). </br>
 Data can be found here: https://github.com/DataTalksClub/nyc-tlc-data/releases/tag/fhv </p>
 
+**Ans:-**
+
+**1. Created python code to download files from above url and then upload into gcs and ran it via prefect.**
+
+<b>gcs bucket block :- </b>
+
+![image](https://user-images.githubusercontent.com/6199261/218431883-039201f3-241b-4f12-8dbb-e7afa9802c32.png)
+
+<b>main file :- </b>
+https://github.com/pgupta1980/de-zoomcamp-hw-2023/blob/ec93cd611bbf54efe4c172eb3f186c6c36058465/cohorts/2023/week_3_data_warehouse/load_ytdata_into_gs.py
+
+<b>Prefect Commands :- </b>
+
+```
+prefect deployment build ./load_ytdata_into_gs.py:etl_web_to_gcs -n "ytd_to_gs" -a
+prefect deployment run etl-web-to-gcs/ytd_to_gs --params '{"year":2019}'
+```
+<b>Result :- </b>
+![image](https://user-images.githubusercontent.com/6199261/218433663-d3368a27-4450-4b06-9d3e-2e78e0e147fe.png)
+
+**2. Created external table in bq.**
+```
+CREATE OR REPLACE EXTERNAL TABLE `de-zoomcamp-2023-375514.nytaxi.fhv_td_2019_ext`
+OPTIONS (
+  format = 'CSV',
+  uris = ['gs://week3_bq/data/fhv/fhv_tripdata_2019-*.csv.gz']
+);
+
+```
+![image](https://user-images.githubusercontent.com/6199261/218434675-0aea8ed7-b622-451e-8b2d-55cbba90bb17.png)
+
+**3. Created a non partitioned table from external table.**
+```
+CREATE OR REPLACE TABLE de-zoomcamp-2023-375514.nytaxi.fhv_td_2019_np AS
+SELECT * FROM de-zoomcamp-2023-375514.nytaxi.fhv_td_2019_ext;
+```
+![image](https://user-images.githubusercontent.com/6199261/218436639-a42d075a-60c4-4c64-9edc-29ab3fc28ac0.png)
+
+
 ## Question 1:
 What is the count for fhv vehicle records for year 2019?
 - 65,623,481
 - 43,244,696
 - 22,978,333
 - 13,942,414
+
+**Ans:-** - 43,244,696
+
+```
+SELECT count(1) FROM `de-zoomcamp-2023-375514.nytaxi.fhv_td_2019_ext`
+
+43244696
+```
+![image](https://user-images.githubusercontent.com/6199261/218435355-97a7cee7-af8a-41ec-8dfe-ed2203dce657.png)
+
 
 ## Question 2:
 Write a query to count the distinct number of affiliated_base_number for the entire dataset on both the tables.</br> 
@@ -24,6 +73,26 @@ What is the estimated amount of data that will be read when this query is execut
 - 225.82 MB for the External Table and 47.60MB for the BQ Table
 - 0 MB for the External Table and 0MB for the BQ Table
 - 0 MB for the External Table and 317.94MB for the BQ Table 
+
+**Ans:-**
+- 0 MB for the External Table and 317.94MB for the BQ Table 
+
+**External Table -**
+```
+SELECT COUNT(DISTINCT(affiliated_base_number)) FROM `de-zoomcamp-2023-375514.nytaxi.fhv_td_2019_ext`;
+Bytes processed : 0 B (results cached)
+```
+![image](https://user-images.githubusercontent.com/6199261/218437228-ecdb19cf-4250-42a0-889e-51e9c0349855.png)
+![image](https://user-images.githubusercontent.com/6199261/218437679-dab4b7dc-10db-4239-8d5e-37ebb5bf4d45.png)
+
+**Non-partitioned bq table -**
+
+```
+SELECT COUNT(DISTINCT(affiliated_base_number)) FROM `de-zoomcamp-2023-375514.nytaxi.fhv_td_2019_np`;
+Bytes processed : 317.94 MB
+```
+![image](https://user-images.githubusercontent.com/6199261/218438031-72310253-45ff-4d3c-ac59-ad571f52179f.png)
+![image](https://user-images.githubusercontent.com/6199261/218438141-64bafb2b-a548-4a3f-9353-9604bb0361eb.png)
 
 
 ## Question 3:
