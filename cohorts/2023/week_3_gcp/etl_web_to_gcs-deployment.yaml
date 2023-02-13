@@ -1,0 +1,45 @@
+###
+### A complete description of a Prefect Deployment for flow 'etl-web-to-gcs'
+###
+name: ytd_to_gs
+description: The main ETL function
+version: 6c84d0dfa85d1a06b230d4795702f739
+# The work queue that will handle this deployment's runs
+work_queue_name: default
+tags: []
+parameters: {}
+schedule: null
+infra_overrides: {}
+
+###
+### DO NOT EDIT BELOW THIS LINE
+###
+flow_name: etl-web-to-gcs
+manifest_path: null
+infrastructure:
+  type: process
+  env: {}
+  labels: {}
+  name: null
+  command: null
+  stream_output: true
+  working_dir: null
+  _block_document_id: 75a3b1b7-3e3a-48d5-b559-60e3515643ae
+  _block_document_name: anonymous-3c379d54-5824-43e9-a277-47d6ee463cfe
+  _is_anonymous: true
+  block_type_slug: process
+  _block_type_slug: process
+storage: null
+path: /home/pgupta/de-zoomcamp-hw-2023/cohorts/2023/week_3_gcp
+entrypoint: load_ytdata_into_gs.py:etl_web_to_gcs
+parameter_openapi_schema:
+  title: Parameters
+  type: object
+  properties:
+    year:
+      title: year
+      position: 0
+      type: integer
+  required:
+  - year
+  definitions: null
