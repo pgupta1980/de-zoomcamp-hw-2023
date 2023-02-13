@@ -74,8 +74,7 @@ What is the estimated amount of data that will be read when this query is execut
 - 0 MB for the External Table and 0MB for the BQ Table
 - 0 MB for the External Table and 317.94MB for the BQ Table 
 
-**Ans:-**
-- 0 MB for the External Table and 317.94MB for the BQ Table 
+**Ans:-** - 0 MB for the External Table and 317.94MB for the BQ Table 
 
 **External Table -**
 ```
@@ -102,12 +101,37 @@ How many records have both a blank (null) PUlocationID and DOlocationID in the e
 - 5
 - 20,332
 
+**Ans:-** - 717,748
+
+```
+SELECT COUNT(1) FROM `de-zoomcamp-2023-375514.nytaxi.fhv_td_2019_np` 
+where PUlocationID is NULL and DOlocationID  is NULL;
+717748
+```
+
+![image](https://user-images.githubusercontent.com/6199261/218439415-1c81e15a-0d1e-447b-b3a4-ae4af59c4ffe.png)
+
+
 ## Question 4:
 What is the best strategy to optimize the table if query always filter by pickup_datetime and order by affiliated_base_number?
 - Cluster on pickup_datetime Cluster on affiliated_base_number
 - Partition by pickup_datetime Cluster on affiliated_base_number
 - Partition by pickup_datetime Partition by affiliated_base_number
 - Partition by affiliated_base_number Cluster on pickup_datetime
+
+**Ans:-** - Partition by pickup_datetime Cluster on affiliated_base_number
+
+If we partition on pickup_datetime, then the query for filtering by pickup_datetime will scan only the relevant partition for the filtered pickup_datetime and the query will be efficient and fast. Next, for ordering by affiliated_base_number, the same column can be used for clustering which will store the values of affiliated_base_number in sorted manner, thereby resulting in further query improvement.
+
+```
+CREATE OR REPLACE TABLE `de-zoomcamp-2023-375514.nytaxi.fhv_td_2019_p`
+PARTITION BY DATE(pickup_datetime)
+CLUSTER BY affiliated_base_number AS (
+  SELECT * FROM `de-zoomcamp-2023-375514.nytaxi.fhv_td_2019_np`
+);
+```
+
+![image](https://user-images.githubusercontent.com/6199261/218441458-dee995fc-aed8-4809-a0a0-0925af437fab.png)
 
 ## Question 5:
 Implement the optimized solution you chose for question 4. Write a query to retrieve the distinct affiliated_base_number between pickup_datetime 2019/03/01 and 2019/03/31 (inclusive).</br> 
@@ -116,6 +140,26 @@ Use the BQ table you created earlier in your from clause and note the estimated 
 - 647.87 MB for non-partitioned table and 23.06 MB for the partitioned table
 - 582.63 MB for non-partitioned table and 0 MB for the partitioned table
 - 646.25 MB for non-partitioned table and 646.25 MB for the partitioned table
+
+**Ans:-** - 647.87 MB for non-partitioned table and 23.06 MB for the partitioned table
+
+**non-partitioned table:-**
+```
+select distinct(affiliated_base_number) from `de-zoomcamp-2023-375514.nytaxi.fhv_td_2019_np` 
+where DATE(pickup_datetime) >= "2019-03-01" and DATE(pickup_datetime) <= "2019-03-31";
+Bytes processed : 647.87 MB
+```
+
+![image](https://user-images.githubusercontent.com/6199261/218442035-bfb15beb-ec30-4ed7-ad4d-470d4d207c46.png)
+
+**partitioned table:-**
+```
+select distinct(affiliated_base_number) from `de-zoomcamp-2023-375514.nytaxi.fhv_td_2019_p` 
+where DATE(pickup_datetime) >= "2019-03-01" and DATE(pickup_datetime) <= "2019-03-31";
+Bytes processed : 23.05 MB
+```
+
+![image](https://user-images.githubusercontent.com/6199261/218447589-b3eb9af4-502c-4099-a732-c36594993b95.png)
 
 
 ## Question 6: 
@@ -126,12 +170,17 @@ Where is the data stored in the External Table you created?
 - Container Registry
 - Big Table
 
+**Ans:-** - GCP Bucket
 
 ## Question 7:
 It is best practice in Big Query to always cluster your data:
 - True
 - False
 
+**Ans:-** - 
+False
+Below a threshold size (1 GB) Clustering results in a lot of overhead and doesn't produce the best optimization for query so it is not always a best practice,
+especially for less data.
 
 ## (Not required) Question 8:
 A better format to store these files may be parquet. Create a data pipeline to download the gzip files and convert them into parquet. Upload the files to your GCP Bucket and create an External and BQ Table. 
