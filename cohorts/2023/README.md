@@ -9,18 +9,14 @@
 
 [**Week 1: Introduction & Prerequisites**](week_1_docker_sql/homework.md)
 
-[**Week 2: Workflow Orchestration**](week_2/homework.md)
+[**Week 2: Workflow Orchestration**](week_2_workflow_orchestration/homework.md)
 
-Week 3: Data Warehouse
-
+[**Week 3: Data Warehouse**](week_3_data_warehouse/homework.md)
 
 Week 4: Analytics Engineering
 
-
 Week 5: Batch processing
 
-
 Week 6: Streaming
-
 
 Week 7, 8 & 9: Project
