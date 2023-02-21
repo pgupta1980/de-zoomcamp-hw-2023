@@ -1,9 +1,9 @@
 ###
 ### A complete description of a Prefect Deployment for flow 'etl-web-to-gcs'
 ###
-name: github-deploy
+name: wk4data_into_gs
 description: The main ETL function
-version: aa9d2fb82f47e5ba6b06237c35799e07
+version: 5caec2e1225d9acb5638276a023c74e9
 # The work queue that will handle this deployment's runs
 work_queue_name: default
 tags: []
@@ -24,40 +24,32 @@ infrastructure:
   command: null
   stream_output: true
   working_dir: null
-  _block_document_id: 90e7dd1b-509e-4fce-b052-d10d9ccee288
-  _block_document_name: anonymous-35ea70a4-a506-4438-a6c7-5e49c5ff18ef
+  _block_document_id: 9e9650e5-324d-41cb-8e8b-906ad18fe525
+  _block_document_name: anonymous-5e5aafbe-43f0-4f40-8865-b3338bfb1b26
   _is_anonymous: true
   block_type_slug: process
   _block_type_slug: process
-storage:
-  repository: https://github.com/pgupta1980/de-zoomcamp-hw-2023.git
-  reference: null
-  access_token: null
-  _block_document_id: ba570e38-4968-4be1-baad-5de2dcde393e
-  _block_document_name: de-zoomcamp-github
-  _is_anonymous: false
-  block_type_slug: github
-  _block_type_slug: github
-path: week_2/
-entrypoint: week_2/ans4.py:etl_web_to_gcs
+storage: null
+path: /home/pgupta/de-zoomcamp-hw-2023/cohorts/2023/week_4_analytics_engineering/provision_data
+entrypoint: load_wk4data_into_gs.py:etl_web_to_gcs
 parameter_openapi_schema:
   title: Parameters
   type: object
   properties:
-    color:
-      title: color
+    dataset_url:
+      title: dataset_url
       position: 0
+      type: string
+    dataset_file_prefix:
+      title: dataset_file_prefix
+      position: 1
       type: string
     year:
       title: year
-      position: 1
-      type: integer
-    month:
-      title: month
       position: 2
       type: integer
   required:
-  - color
+  - dataset_url
+  - dataset_file_prefix
   - year
-  - month
   definitions: null
