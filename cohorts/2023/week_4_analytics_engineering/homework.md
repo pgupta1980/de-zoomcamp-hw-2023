@@ -31,6 +31,16 @@ You should find the views and models for querying in your DWH.
 - 61648442
 - 71648442
 
+**Ans:-** 61648442
+
+**My prepared dashboards (Screenshot below) :**
+* Page 1 - FHV Trips Analysis
+* Page 2 - Green and Yellow Trips Analysis (as per the tutorial)
+
+![image](https://user-images.githubusercontent.com/6199261/221273759-d5341533-c537-4a06-9699-322d3531c6e7.png)
+**Answer as per record count in Page 2**
+
+![image](https://user-images.githubusercontent.com/6199261/221271853-69de0979-d1e0-4a9f-b8e4-955c24c74a29.png)
 
 ### Question 2: 
 
@@ -42,6 +52,10 @@ You will need to complete "Visualising the data" videos, either using [google da
 - 94/6
 - 76.3/23.7
 - 99.1/0.9
+
+**Ans:-** 89.9/10.1 - **As per Service Type Distribution filtering in Page 2 - Green and Yellow Trips Analysis in the screenshot below.**
+
+![image](https://user-images.githubusercontent.com/6199261/221272476-d563c7d3-3a6f-4301-b24a-6879a9925d41.png)
 
 
 
@@ -57,6 +71,14 @@ Filter records with pickup time in year 2019.
 - 53244696
 - 63244696
 
+**Ans:-** 43244696
+```
+Query used - SELECT count(1) FROM `de-zoomcamp-2023-375514.dbt_pgupta1980.stg_fhv_tripdata` 
+where EXTRACT(YEAR FROM pickup_datetime) = 2019;
+```
+**Screenshot below : **
+
+![image](https://user-images.githubusercontent.com/6199261/221270514-8ae929e2-0311-4997-bb62-52f0fa96474d.png)
 
 ### Question 4: 
 
@@ -71,6 +93,10 @@ Run it via the CLI without limits (is_test_run: false) and filter records with p
 - 32998722
 - 42998722
 
+**Ans:-** 22998722 - **As per Record Count in Page 1 - FHV Trips Analysis in the screenshot below.**
+
+![image](https://user-images.githubusercontent.com/6199261/221274088-ad11adf3-7cdd-4273-9ca8-0c1ad70fd0e3.png)
+
 ### Question 5: 
 
 **What is the month with the biggest amount of rides after building a tile for the fact_fhv_trips table?**
@@ -82,7 +108,9 @@ Create a dashboard with some tiles that you find interesting to explore the data
 - January
 - December
 
+**Ans:-** January - **As per Trips per Month tile in Page 1 - FHV Trips Analysis in the screenshot below.**
 
+![image](https://user-images.githubusercontent.com/6199261/221274218-ffef4053-832c-459f-bac0-9710cfd3a55d.png)
 
 ## Submitting the solutions
 
