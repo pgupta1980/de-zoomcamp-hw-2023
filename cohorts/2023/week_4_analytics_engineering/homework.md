@@ -37,7 +37,7 @@ You should find the views and models for querying in your DWH.
 * Page 1 - FHV Trips Analysis
 * Page 2 - Green and Yellow Trips Analysis (as per the tutorial)
 
-![image](https://user-images.githubusercontent.com/6199261/221273759-d5341533-c537-4a06-9699-322d3531c6e7.png)
+![image](https://user-images.githubusercontent.com/6199261/221280187-0ff92a94-904d-4feb-998d-20f0ac1574f8.png)
 
 **Answer as per record count in Page 2**
 
