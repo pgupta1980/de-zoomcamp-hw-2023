@@ -10,7 +10,7 @@ select
     cast(PUlocationID as integer) as  pickup_locationid,
     cast(DOlocationID as integer) as dropoff_locationid,
     cast(SR_Flag as integer) as sr_flag,
-    cast(Affiliated_base_number as integer) as affiliated_base_number
+    cast(Affiliated_base_number as string) as affiliated_base_number
    
 from {{ source('staging','fhv_tripdata') }}
 
