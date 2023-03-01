@@ -254,7 +254,7 @@ services:
 ```
 
 to load the data again you need to run
-
+```
 docker stop $(docker ps -aq)
 docker rm $(docker ps -aq)
 docker rmi $(docker images -q)
@@ -281,7 +281,7 @@ docker run -it \
     --table_name=yellow_taxi_trips \
     --url=${URL}
 ### SQL 
-
+```
 Coming soon!
 docker exec -it mycontainer sh
 
