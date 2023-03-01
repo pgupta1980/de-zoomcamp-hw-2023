@@ -280,9 +280,12 @@ docker run -it \
     --db=ny_taxi \
     --table_name=yellow_taxi_trips \
     --url=${URL}
-### SQL 
+
+docker exec -it mycontainer sh
+docker exec -it mycontainer bash
+
 ```
 Coming soon!
-docker exec -it mycontainer sh
+### SQL 
 
-docker exec -it mycontainer bash
+
