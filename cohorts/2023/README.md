@@ -15,7 +15,7 @@
 
 [**Week 4: Analytics Engineering**](week_4_analytics_engineering/homework.md)
 
-Week 5: Batch processing
+[**Week 5: Batch processing**](week_5_batch_processing/homework.md)
 
 Week 6: Streaming
 
