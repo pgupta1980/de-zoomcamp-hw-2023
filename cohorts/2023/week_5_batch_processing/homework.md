@@ -38,6 +38,9 @@ spark = SparkSession.builder \
 spark.version
 
 ```
+**Screenshot:**
+
+![image](https://user-images.githubusercontent.com/6199261/223182636-4b33cd09-c353-4a08-ae19-e619dfcf7c0a.png)
 
 ### Question 2: 
 
@@ -55,6 +58,29 @@ What is the average size of the Parquet (ending with .parquet extension) Files t
 - 250MB
 </br></br>
 
+### Ans:
+24MB
+
+```
+!ls -l /home/pgupta/data/pq/fhvhv/2021/06/ --block-size=M
+total 271M
+-rw-r--r-- 1 pgupta pgupta  0M Mar  6 17:22 _SUCCESS
+-rw-r--r-- 1 pgupta pgupta 23M Mar  6 17:22 part-00000-1394a35a-758a-4077-a240-c3228c7feb3f-c000.snappy.parquet
+-rw-r--r-- 1 pgupta pgupta 23M Mar  6 17:22 part-00001-1394a35a-758a-4077-a240-c3228c7feb3f-c000.snappy.parquet
+-rw-r--r-- 1 pgupta pgupta 23M Mar  6 17:22 part-00002-1394a35a-758a-4077-a240-c3228c7feb3f-c000.snappy.parquet
+-rw-r--r-- 1 pgupta pgupta 23M Mar  6 17:22 part-00003-1394a35a-758a-4077-a240-c3228c7feb3f-c000.snappy.parquet
+-rw-r--r-- 1 pgupta pgupta 23M Mar  6 17:22 part-00004-1394a35a-758a-4077-a240-c3228c7feb3f-c000.snappy.parquet
+-rw-r--r-- 1 pgupta pgupta 23M Mar  6 17:22 part-00005-1394a35a-758a-4077-a240-c3228c7feb3f-c000.snappy.parquet
+-rw-r--r-- 1 pgupta pgupta 23M Mar  6 17:22 part-00006-1394a35a-758a-4077-a240-c3228c7feb3f-c000.snappy.parquet
+-rw-r--r-- 1 pgupta pgupta 23M Mar  6 17:22 part-00007-1394a35a-758a-4077-a240-c3228c7feb3f-c000.snappy.parquet
+-rw-r--r-- 1 pgupta pgupta 23M Mar  6 17:22 part-00008-1394a35a-758a-4077-a240-c3228c7feb3f-c000.snappy.parquet
+-rw-r--r-- 1 pgupta pgupta 23M Mar  6 17:22 part-00009-1394a35a-758a-4077-a240-c3228c7feb3f-c000.snappy.parquet
+-rw-r--r-- 1 pgupta pgupta 23M Mar  6 17:22 part-00010-1394a35a-758a-4077-a240-c3228c7feb3f-c000.snappy.parquet
+-rw-r--r-- 1 pgupta pgupta 23M Mar  6 17:22 part-00011-1394a35a-758a-4077-a240-c3228c7feb3f-c000.snappy.parquet
+```
+**Screenshot:**
+
+![image](https://user-images.githubusercontent.com/6199261/223184703-31b36e5d-f53d-4fd6-b556-169739a988cf.png)
 
 ### Question 3: 
 
@@ -69,6 +95,19 @@ Consider only trips that started on June 15.</br>
 - 50,982
 </br></br>
 
+### Ans:
+452,470
+
+```
+df.withColumn('pickup_date', F.to_date(df.pickup_datetime)) \
+    .filter("pickup_date = '2021-06-15'") \
+    .count()
+    
+452470
+```
+**Screenshot:**
+
+![image](https://user-images.githubusercontent.com/6199261/223185628-0182c042-e8b9-47dd-a4ba-8c55c811ee5f.png)
 
 ### Question 4: 
 
@@ -83,6 +122,24 @@ How long was the longest trip in Hours?</br>
 - 3.32 Hours
 </br></br>
 
+### Ans:
+452,470
+
+```
+df.withColumn('trip_duration_in_hrs', \
+              (F.col("dropoff_datetime").cast("long") - F.col('pickup_datetime').cast("long"))/3600) \
+.select(F.col('trip_duration_in_hrs')).sort(F.col('trip_duration_in_hrs').desc()).limit(1).show()
+    
++--------------------+
+|trip_duration_in_hrs|
++--------------------+
+|    66.8788888888889|
++--------------------+
+```
+**Screenshot:**
+
+![image](https://user-images.githubusercontent.com/6199261/223186007-9c424638-ee87-477f-8ad8-8d66339bc877.png)
+
 ### Question 5: 
 
 **User Interface**
@@ -94,6 +151,13 @@ How long was the longest trip in Hours?</br>
 - 4040
 - 8080
 </br></br>
+
+### Ans:
+4040
+
+**Screenshot:**
+
+![image](https://user-images.githubusercontent.com/6199261/223186980-9b5b2960-cf1c-425d-ba82-f337c679aeeb.png)
 
 
 ### Question 6: 
@@ -111,8 +175,33 @@ Using the zone lookup data and the fhvhv June 2021 data, what is the name of the
 - Crown Heights North
 </br></br>
 
+### Ans:
+Crown Heights North
 
+```
+spark.read \
+    .option("header", "true") \
+    .csv('/home/pgupta/data/ny_taxi_data/taxi+_zone_lookup.csv').createOrReplaceTempView("taxi_lookup_v")
 
+df.createOrReplaceTempView("fhvhv_2021_06_v")
+
+spark.sql("""select b.Zone as zone, count(1) as count from
+fhvhv_2021_06_v a,
+taxi_lookup_v b
+where a.PULocationID = b.LocationID
+group by zone""").sort(F.col('count').desc()).limit(1).show()
+
++-------------------+------+
+|               zone| count|
++-------------------+------+
+|Crown Heights North|231279|
++-------------------+------+
+
+```
+
+**Screenshot:**
+
+![image](https://user-images.githubusercontent.com/6199261/223187892-ee766056-42c2-4aef-a2e1-f9c3eb74edb9.png)
 
 ## Submitting the solutions
 
