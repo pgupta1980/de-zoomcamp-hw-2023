@@ -123,7 +123,7 @@ How long was the longest trip in Hours?</br>
 </br></br>
 
 ### Ans:
-452,470
+66.87 Hours
 
 ```
 df.withColumn('trip_duration_in_hrs', \
